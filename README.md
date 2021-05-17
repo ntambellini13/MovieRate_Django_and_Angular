@@ -1,0 +1,1 @@
+# MovieRate_Django_and_Angular
