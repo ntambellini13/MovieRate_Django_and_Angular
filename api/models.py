@@ -23,6 +23,9 @@ class Movie(models.Model):
         else:
             return None
 
+    def __str__(self):
+        return self.title
+
 
 class Rating(models.Model):
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
@@ -33,3 +36,5 @@ class Rating(models.Model):
         unique_together = (('user', 'movie'),)
         index_together = (('user', 'movie'),)
 
+    def __str__(self):
+        return self.user.username + ' - ' + self.movie.title
