@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../../services/api.service';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-movie-list',
@@ -7,20 +6,16 @@ import { ApiService } from '../../services/api.service';
   styleUrls: ['./movie-list.component.css']
 })
 export class MovieListComponent implements OnInit {
-  
-  movies = [];
 
-  constructor(
-    private apiService: ApiService
-  ) { }
+  @Input() movies = [];
+  @Output() selectMovie = new EventEmitter();
 
-  ngOnInit() {
-    this.apiService.getMovies().subscribe(
-      data => {
-        this.movies = data;
-      },
-      error => console.log(error)
-    );
+  constructor() { }
+
+  ngOnInit() {}
+
+  movieClicked(movie) {
+    this.selectMovie.emit(movie);
   }
 
 }
