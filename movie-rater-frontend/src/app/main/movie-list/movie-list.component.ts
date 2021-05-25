@@ -7,15 +7,20 @@ import { ApiService } from '../../services/api.service';
   styleUrls: ['./movie-list.component.css']
 })
 export class MovieListComponent implements OnInit {
-
-  movies =[];
+  
+  movies = [];
 
   constructor(
     private apiService: ApiService
   ) { }
 
   ngOnInit() {
-    this.movies = this.apiService.getMovies();
+    this.apiService.getMovies().subscribe(
+      data => {
+        this.movies = data;
+      },
+      error => console.log(error)
+    );
   }
 
 }
