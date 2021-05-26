@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router'
 import { HttpClientModule } from '@angular/common/http';
 
-
 import { AuthModule } from './auth/auth.module';
 import { MainModule } from './main/main.module';
 
@@ -22,7 +21,7 @@ const routes: Routes = [
     AuthModule,
     MainModule,
     HttpClientModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
   ],
   exports: [
     RouterModule

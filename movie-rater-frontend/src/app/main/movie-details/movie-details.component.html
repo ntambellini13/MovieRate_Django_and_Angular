@@ -1,8 +1,10 @@
 <div *ngIf="movie">
     <h1>{{ movie.title }}</h1>
+    <fa name="star" [ngClass]="{'orange': movie.average_rating > 0}"></fa>
+    <fa name="star" [ngClass]="{'orange': movie.average_rating > 1}"></fa>
+    <fa name="star" [ngClass]="{'orange': movie.average_rating > 2}"></fa>
+    <fa name="star" [ngClass]="{'orange': movie.average_rating > 3}"></fa>
+    <fa name="star" [ngClass]="{'orange': movie.average_rating > 4}"></fa>
+    ({{movie.number_of_ratings}})
     <p>{{ movie.description }}</p>
-
-    {{movie.average_rating}} ({{movie.number_of_ratings}})
 </div>
-
-
