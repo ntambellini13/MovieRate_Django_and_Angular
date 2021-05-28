@@ -16,8 +16,12 @@ export class ApiService {
     private httpClient: HttpClient
   ) { }
 
-
   getMovies() {
     return this.httpClient.get(this.baseUrl, {headers: this.headers});
+  }
+
+  rateMovie(rating: number, movieId: number) {
+    const body = JSON.stringify({stars: rating});
+    return this.httpClient.post(`${this.baseUrl}${movieId}/rate_movie/`, body, {headers: this.headers});
   }
 }

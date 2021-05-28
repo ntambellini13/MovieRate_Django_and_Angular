@@ -7,4 +7,12 @@
     <fa name="star" [ngClass]="{'orange': movie.average_rating > 4}"></fa>
     ({{movie.number_of_ratings}})
     <p>{{ movie.description }}</p>
+
+    <div id="rate-container">
+        <h2>Rate This Movie</h2>
+        <fa *ngFor="let rating of [1,2,3,4,5]" name="star" (mouseenter)="rateHover(rating)"
+        (mouseleave)="rateHovered =0" (click)="rateClicked(rating)"
+        [ngClass]="{'purple': rateHovered >= rating}"
+        ></fa>
+    </div>
 </div>
