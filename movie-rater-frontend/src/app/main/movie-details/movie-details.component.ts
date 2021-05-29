@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Movie } from '../../models/movie';
 import { ApiService } from '../../services/api.service';
 
 @Component({
@@ -8,8 +9,8 @@ import { ApiService } from '../../services/api.service';
 })
 export class MovieDetailsComponent implements OnInit {
 
-  @Input() movie;
-  @Output() updateMovie = new EventEmitter();
+  @Input() movie: Movie;
+  @Output() updateMovie = new EventEmitter<Movie>();
   rateHovered = 0;
 
   constructor(
@@ -18,11 +19,11 @@ export class MovieDetailsComponent implements OnInit {
 
   ngOnInit() {
   }
-  rateHover(rating) {
+  rateHover(rating: number) {
     this.rateHovered = rating;
   }
 
-  rateClicked(rating){
+  rateClicked(rating: number){
     this.apiService.rateMovie(rating, this.movie.id).subscribe(
       result => this.getDetails(),
       error => console.log(error)
@@ -31,7 +32,7 @@ export class MovieDetailsComponent implements OnInit {
 
   getDetails(){
     this.apiService.getMovie(this.movie.id).subscribe(
-      movie => {
+      (movie: Movie) => {
         this.updateMovie.emit(movie);
       },
       error => console.log(error)
