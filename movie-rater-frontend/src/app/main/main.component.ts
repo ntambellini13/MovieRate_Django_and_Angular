@@ -10,7 +10,7 @@ import { ApiService } from '../services/api.service';
 export class MainComponent implements OnInit {
 
   movies: Movie[] = [];
-  selectedMovie = null
+  selectedMovie: Movie = null
 
   constructor(
     private apiService: ApiService
@@ -20,14 +20,11 @@ export class MainComponent implements OnInit {
     this.apiService.getMovies().subscribe(
       (data: Movie[]) => {
         this.movies = data;
-      },
-      error => console.log(error)
-    );
-  }
+      });
+    }
 
   selectMovie(movie: Movie) {
     this.selectedMovie = movie;
-    console.log(this.selectedMovie);
   }
-
+  
 }

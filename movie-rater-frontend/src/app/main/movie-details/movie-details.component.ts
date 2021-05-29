@@ -10,7 +10,7 @@ import { ApiService } from '../../services/api.service';
 export class MovieDetailsComponent implements OnInit {
 
   @Input() movie: Movie;
-  @Output() updateMovie = new EventEmitter<Movie>();
+  @Output() updateMovie = new EventEmitter();
   rateHovered = 0;
 
   constructor(
@@ -25,8 +25,7 @@ export class MovieDetailsComponent implements OnInit {
 
   rateClicked(rating: number){
     this.apiService.rateMovie(rating, this.movie.id).subscribe(
-      result => this.getDetails(),
-      error => console.log(error)
+      result => this.getDetails()
     );
   }
 
@@ -34,8 +33,6 @@ export class MovieDetailsComponent implements OnInit {
     this.apiService.getMovie(this.movie.id).subscribe(
       (movie: Movie) => {
         this.updateMovie.emit(movie);
-      },
-      error => console.log(error)
-    );
+      });
   }
 }
