@@ -10,8 +10,8 @@ import { ApiService } from '../services/api.service';
 export class MainComponent implements OnInit {
 
   movies: Movie[] = [];
-  selectedMovie: Movie = null
-  editMovie: Movie = null
+  selectedMovie = null
+  editedMovie = null
 
   constructor(
     private apiService: ApiService
@@ -26,6 +26,21 @@ export class MainComponent implements OnInit {
 
   selectMovie(movie: Movie) {
     this.selectedMovie = movie;
+    this.editedMovie = null;
   }
   
+  editMovie(movie: Movie) {
+    this.editedMovie = movie;
+    this.selectedMovie = null;
+  }
+
+  createNewMovie() {
+    this.editedMovie = {title: '', description: ''};
+    this.selectedMovie = null;
+  }
+  
+  deleteMovie(movie: Movie) {
+    // TOD remove movie with API
+    console.log('delete', movie.title);
+  }
 }

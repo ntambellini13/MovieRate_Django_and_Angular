@@ -9,7 +9,10 @@ import { Movie } from 'src/app/models/movie';
 export class MovieListComponent implements OnInit {
 
   @Input() movies: Movie[] = [];
-  @Output() selectMovie = new EventEmitter();
+  @Output() selectMovie = new EventEmitter<Movie>();
+  @Output() editedMovie = new EventEmitter<Movie>();
+  @Output() createNewMovie = new EventEmitter();
+  @Output() deletedMovie = new EventEmitter<Movie>();
 
   constructor() { }
 
@@ -18,5 +21,17 @@ export class MovieListComponent implements OnInit {
   movieClicked(movie: Movie) {
     this.selectMovie.emit(movie);
   }
+
+  editMovie(movie: Movie) {
+    this.editedMovie.emit(movie);
+  }
+
+  newMovie() {
+    this.createNewMovie.emit();
+  }
+
+  deleteMovie(movie: Movie) {
+    this.deletedMovie.emit(movie);
+  }  
 
 }
