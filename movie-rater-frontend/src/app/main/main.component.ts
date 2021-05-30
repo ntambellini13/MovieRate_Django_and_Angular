@@ -11,6 +11,7 @@ export class MainComponent implements OnInit {
 
   movies: Movie[] = [];
   selectedMovie: Movie = null
+  editMovie: Movie = null
 
   constructor(
     private apiService: ApiService
