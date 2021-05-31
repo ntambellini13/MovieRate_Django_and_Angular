@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Routes, RouterModule } from '@angular/router'
-
+import { Routes, RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 import { ApiService } from '../services/api.service';
 
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
@@ -24,6 +24,7 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     AngularFontAwesomeModule,
     RouterModule.forChild(routes)
   ],
