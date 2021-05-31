@@ -30,6 +30,11 @@ export class ApiService {
     return this.httpClient.post(`${this.baseUrl}`, body, {headers: this.headers});
   }
 
+  updateMovie(id: number, title: string, description: string) {
+    const body = JSON.stringify({title, description});
+    return this.httpClient.put(`${this.baseUrl}${id}/`, body, {headers: this.headers});
+  }
+
   rateMovie(rating: number, movieId: number) {
     const body = JSON.stringify({stars: rating});
     return this.httpClient.post<Movie>(`${this.baseUrl}${movieId}/rate_movie/`, body, {headers: this.headers});

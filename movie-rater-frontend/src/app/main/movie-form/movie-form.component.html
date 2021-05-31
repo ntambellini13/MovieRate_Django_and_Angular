@@ -8,5 +8,8 @@
     <br>
     <textarea type="text" formControlName="description"></textarea>
     <br>
-    <button type="submit">SAVE</button>
+    <button type="submit">
+        <span *ngIf="id">UPDATE MOVIE</span>
+        <span *ngIf="!id">CREATE NEW MOVIE</span>
+    </button>
 </form>
