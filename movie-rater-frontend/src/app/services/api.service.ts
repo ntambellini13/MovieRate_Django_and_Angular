@@ -20,8 +20,14 @@ export class ApiService {
   getMovies() {
     return this.httpClient.get<Movie[]>(this.baseUrl, {headers: this.headers});
   }
+
   getMovie(id: number) {
     return this.httpClient.get<Movie>(`${this.baseUrl}${id}/`, {headers: this.headers});
+  }
+
+  createMovie(title: string, description: string) {
+    const body = JSON.stringify({title, description});
+    return this.httpClient.post(`${this.baseUrl}`, body, {headers: this.headers});
   }
 
   rateMovie(rating: number, movieId: number) {
