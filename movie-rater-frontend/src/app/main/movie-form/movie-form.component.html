@@ -8,7 +8,7 @@
     <br>
     <textarea type="text" formControlName="description"></textarea>
     <br>
-    <button type="submit">
+    <button type="submit" [disabled]="formDisabled()">
         <span *ngIf="id">UPDATE MOVIE</span>
         <span *ngIf="!id">CREATE NEW MOVIE</span>
     </button>
