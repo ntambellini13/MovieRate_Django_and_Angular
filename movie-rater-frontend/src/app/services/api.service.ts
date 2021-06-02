@@ -7,10 +7,12 @@ import { Movie } from '../models/movie';
 })
 export class ApiService {
 
-  baseUrl = 'http://127.0.0.1:8000/api/movies/';
+  baseUrl = 'http://127.0.0.1:8000/';
+  baseMovieUrl = `${this.baseUrl}api/movies/`;
+  
   headers = new HttpHeaders({
     'Content-Type': 'application/json',
-    Authorization: 'Token 36c13f064a0db74f4dcab203bc590e3004a1496e'
+    //Authorization: 'Token 36c13f064a0db74f4dcab203bc590e3004a1496e'
   })
 
   constructor(
@@ -18,29 +20,34 @@ export class ApiService {
   ) { }
 
   getMovies() {
-    return this.httpClient.get<Movie[]>(this.baseUrl, {headers: this.headers});
+    return this.httpClient.get<Movie[]>(this.baseMovieUrl, {headers: this.headers});
   }
 
   getMovie(id: number) {
-    return this.httpClient.get<Movie>(`${this.baseUrl}${id}/`, {headers: this.headers});
+    return this.httpClient.get<Movie>(`${this.baseMovieUrl}${id}/`, {headers: this.headers});
   }
 
   createMovie(title: string, description: string) {
     const body = JSON.stringify({title, description});
-    return this.httpClient.post(`${this.baseUrl}`, body, {headers: this.headers});
+    return this.httpClient.post(`${this.baseMovieUrl}`, body, {headers: this.headers});
   }
 
   updateMovie(id: number, title: string, description: string) {
     const body = JSON.stringify({title, description});
-    return this.httpClient.put(`${this.baseUrl}${id}/`, body, {headers: this.headers});
+    return this.httpClient.put(`${this.baseMovieUrl}${id}/`, body, {headers: this.headers});
   }
 
   deleteMovie(id: number) {
-    return this.httpClient.delete(`${this.baseUrl}${id}/`, {headers: this.headers});
+    return this.httpClient.delete(`${this.baseMovieUrl}${id}/`, {headers: this.headers});
   }
 
   rateMovie(rating: number, movieId: number) {
     const body = JSON.stringify({stars: rating});
-    return this.httpClient.post<Movie>(`${this.baseUrl}${movieId}/rate_movie/`, body, {headers: this.headers});
+    return this.httpClient.post<Movie>(`${this.baseMovieUrl}${movieId}/rate_movie/`, body, {headers: this.headers});
+  }
+
+  loginUser(authData) {
+    const body = JSON.stringify(authData);
+    return this.httpClient.post(`${this.baseUrl}auth/`, body, {headers: this.headers});
   }
 }

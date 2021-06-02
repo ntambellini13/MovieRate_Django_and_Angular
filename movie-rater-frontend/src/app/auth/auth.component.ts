@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { ApiService } from '../services/api.service'
+import { CookieService } from 'ngx-cookie-service';
+
+interface TokenObject {
+  token: string;
+}
 
 @Component({
   selector: 'app-auth',
@@ -13,13 +19,22 @@ export class AuthComponent implements OnInit {
     password: new FormControl('')
   });
 
-  constructor() { }
+  constructor(
+    private apiService: ApiService,
+    private cookieService: CookieService
+  ) { }
 
   ngOnInit() {
   }
 
   saveForm() {
-    console.log(this.authForm.value);
+    this.apiService.loginUser(this.authForm.value).subscribe(
+      (result: TokenObject) => {
+        console.log(result);
+        this.cookieService.set('token', result.token);
+      },
+      error => console.log(error)
+    );
   }
 
 }
