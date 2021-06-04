@@ -19,6 +19,7 @@ export class AuthComponent implements OnInit {
     username: new FormControl(''),
     password: new FormControl('')
   });
+  registerMode = false;
 
   constructor(
     private apiService: ApiService,
@@ -34,13 +35,21 @@ export class AuthComponent implements OnInit {
   }
 
   saveForm() {
-    this.apiService.loginUser(this.authForm.value).subscribe(
-      (result: TokenObject) => {
-        this.cookieService.set('token', result.token);
-        this.router.navigate(['/movies']);
-      },
-      error => console.log(error)
-    );
+    if (!this.registerMode) {
+      this.apiService.loginUser(this.authForm.value).subscribe(
+        (result: TokenObject) => {
+          this.cookieService.set('token', result.token);
+          this.router.navigate(['/movies']);
+        },
+        error => console.log(error)
+      );
+    } else {
+      this.apiService.registerUser(this.authForm.value).subscribe(
+        result => {
+          console.log(result);
+        },
+        error => console.log(error)
+      );
+    }
   }
-
 }
