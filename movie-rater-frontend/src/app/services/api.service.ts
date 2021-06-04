@@ -54,7 +54,6 @@ export class ApiService {
 
   registerUser(authData) {
     const body = JSON.stringify(authData);
-    console.log(body);
     return this.httpClient.post(`${this.baseUrl}api/users/`, body, {headers: this.headers});
   }
 
