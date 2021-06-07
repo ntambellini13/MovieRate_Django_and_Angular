@@ -3,7 +3,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { ApiService } from '../services/api.service'
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
-import * as alertify from 'alertifyjs';
+import { AlertifyService } from '../services/alertify.service';
 
 interface TokenObject {
   token: string;
@@ -25,7 +25,8 @@ export class AuthComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private cookieService: CookieService,
-    private router : Router
+    private router : Router,
+    private alertify: AlertifyService
   ) { }
 
   ngOnInit() {
@@ -43,7 +44,7 @@ export class AuthComponent implements OnInit {
         result => {
           this.loginUser();
         },
-        error => alertify.error('Registration failed, please try again.')
+        error => this.alertify.error('Registration failed, please try again.')
       );
     }
   }
@@ -53,9 +54,9 @@ export class AuthComponent implements OnInit {
       (result: TokenObject) => {
         this.cookieService.set('token', result.token);
         this.router.navigate(['/movies']);
-        alertify.success('Successfully logged in!');
+        this.alertify.success('Successfully logged in!');
       },
-      error => alertify.error('Login failed, please try again using your username and password if you have an account.')
+      error => this.alertify.error('Login failed, please try again using your username and password if you have an account.')
     );
   }
   

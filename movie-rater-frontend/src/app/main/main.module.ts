@@ -10,6 +10,7 @@ import { MainComponent } from './main.component';
 import { MovieListComponent } from './movie-list/movie-list.component';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { MovieFormComponent } from './movie-form/movie-form.component';
+import { AlertifyService } from '../services/alertify.service';
 
 const routes: Routes = [
   {path: 'movies', component: MainComponent}
@@ -32,7 +33,8 @@ const routes: Routes = [
     RouterModule
   ],
   providers: [
-    ApiService
+    ApiService,
+    AlertifyService
   ]
 })
 export class MainModule { }
