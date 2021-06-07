@@ -3,6 +3,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { Movie } from '../models/movie';
 import { ApiService } from '../services/api.service';
+import { AlertifyService } from '../services/alertify.service';
 
 @Component({
   selector: 'app-main',
@@ -18,7 +19,8 @@ export class MainComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private cookieService: CookieService,
-    private router: Router
+    private router: Router,
+    private alertify: AlertifyService
   ) { }
 
   ngOnInit() {
@@ -36,7 +38,7 @@ export class MainComponent implements OnInit {
   logout() {
     this.cookieService.delete('token');
     this.router.navigate(['/auth']);
-    
+    this.alertify.success('Successfully logged out.')
   }
 
   selectMovie(movie: Movie) {
@@ -47,6 +49,7 @@ export class MainComponent implements OnInit {
   editMovie(movie: Movie) {
     this.editedMovie = movie;
     this.selectedMovie = null;
+    this.alertify.success(movie.title + " was updated.")
   }
 
   createNewMovie() {
@@ -58,14 +61,16 @@ export class MainComponent implements OnInit {
     this.apiService.deleteMovie(movie.id).subscribe(
       data => {
         this.movies = this.movies.filter(value => value.id !== movie.id);
+        this.alertify.error(movie.title + " was deleted from the ratings list.")
       },
-      error => console.log(error)
+      error => this.alertify.error("There was a problem trying to delete this movie.")
     );
   }
 
   movieCreated(movie: Movie) {
     this.movies.push(movie);
     this.editedMovie = null;
+    this.alertify.success(movie.title + " was added to the movie list!")
   }
 
   movieUpdated(movie: Movie) {

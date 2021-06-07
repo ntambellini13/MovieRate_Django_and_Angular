@@ -17,14 +17,19 @@ export class AlertifyService {
     alertify.success(message);
   }
 
+  error(message: string) {
+    this.setPosition('top-center');
+    alertify.error(message);
+  }
+
   warning(message: string) {
     this.setPosition('top-center');
     alertify.warning(message);
   }
 
-  error(message: string) {
+  message(message: string) {
     this.setPosition('top-center');
-    alertify.error(message);
+    alertify.message(message);
   }
 
 }
