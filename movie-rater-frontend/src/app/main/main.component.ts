@@ -36,6 +36,7 @@ export class MainComponent implements OnInit {
   logout() {
     this.cookieService.delete('token');
     this.router.navigate(['/auth']);
+    
   }
 
   selectMovie(movie: Movie) {

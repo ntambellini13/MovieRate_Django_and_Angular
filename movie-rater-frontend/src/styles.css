@@ -1,3 +1,6 @@
+@import '../node_modules/alertifyjs/build/css/alertify.min.css';
+@import '../node_modules/alertifyjs/build/css/themes/default.min.css';
+
 body {
     margin: 0;
     padding: 0;

@@ -3,6 +3,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { ApiService } from '../services/api.service'
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
+import * as alertify from 'alertifyjs';
 
 interface TokenObject {
   token: string;
@@ -42,7 +43,7 @@ export class AuthComponent implements OnInit {
         result => {
           this.loginUser();
         },
-        error => console.log(error)
+        error => alertify.error('Registration failed, please try again.')
       );
     }
   }
@@ -52,8 +53,9 @@ export class AuthComponent implements OnInit {
       (result: TokenObject) => {
         this.cookieService.set('token', result.token);
         this.router.navigate(['/movies']);
+        alertify.success('Successfully logged in!');
       },
-      error => console.log(error)
+      error => alertify.error('Login failed, please try again using your username and password if you have an account.')
     );
   }
   
