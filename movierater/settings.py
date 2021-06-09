@@ -101,7 +101,7 @@ REST_FRAMEWORK = {
 
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:4200',
-    'https://movie-rater-django-angular.web.app/',
+    'https://movie-rater-django-angular.web.app',
     'https://movie-rater-django-angular.firebaseapp.com'
 ]
 
