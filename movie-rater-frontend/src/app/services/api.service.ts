@@ -8,7 +8,7 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class ApiService {
 
-  baseUrl = 'http://127.0.0.1:8000/';
+  baseUrl = 'https://movie-rater-django-angular.web.app/';
   baseMovieUrl = `${this.baseUrl}api/movies/`;
 
   headers = new HttpHeaders({
